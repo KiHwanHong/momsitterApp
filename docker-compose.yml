@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql/mysql-server:5.7
+    container_name: mysql57
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_MULTIPLE_DATABASES=momsitter
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    ports:
+      - 3306:3306
+    restart: always
+    volumes:
+      - ./docker/mysql/sql:/data/sql

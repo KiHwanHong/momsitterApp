@@ -1,0 +1,22 @@
+bootJar.enabled = false
+jar.enabled = true
+
+description = "support module"
+
+dependencies {
+  compile 'org.slf4j:slf4j-api'
+  compile 'com.fasterxml.jackson.core:jackson-databind'
+  compile 'com.google.guava:guava:25.0-jre'
+  compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+  compile 'org.hibernate:hibernate-envers'
+
+  compile 'org.springframework.security:spring-security-core:5.1.5.RELEASE'
+
+  annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+  //Java8 이상 Feign 사용시 필수 설정
+  compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
+  compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+
+  compile 'org.owasp.encoder:encoder:1.2.2'
+}

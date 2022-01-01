@@ -1,0 +1,12 @@
+logging:
+  config: classpath:logback-local.xml
+  level:
+    web: debug
+
+jwt:
+  client:
+    secret: localwoowayouthfrontjsonwebtoken
+    token-validity-in-seconds: 5400
+  server:
+    secret: "localmomsitterauthapiwebtoken"
+    auth-key: "localwoowayouth2021mositter"

@@ -1,0 +1,115 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.18.RELEASE'
+		lombokVersion = '1.18.4'
+
+	}
+
+	repositories {
+		mavenCentral()
+//		maven { url "http://url" }
+		maven { url "https://plugins.gradle.org/m2/" }
+	}
+
+	dependencies {
+		classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+		classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2"
+		classpath 'gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.10'
+	}
+}
+
+ext {
+	springfoxSwaggerVer = '2.9.2'
+	springCloudVersion = 'Greenwich.RELEASE'
+}
+
+ext.projectVersion = {
+	Properties versionProps = new Properties()
+	versionProps.load(new FileInputStream(file('version.properties')))
+	def (major, minor, patch) = [versionProps['VERSION_MAJOR'].toString(), versionProps['VERSION_MINOR'].toString(), versionProps['VERSION_PATCH'].toString()]
+	return "${major}.${minor}.${patch}"
+}
+
+subprojects {
+	group 'momsitter'
+	version '1.0.0'
+
+	apply plugin: 'java'
+	apply plugin: 'maven'
+	apply plugin: 'groovy'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'project-report'
+
+	project.version = projectVersion()
+
+	def javaVer = '11'
+
+	targetCompatibility = javaVer
+	sourceCompatibility = javaVer
+	compileJava.options.encoding = 'UTF-8'
+
+	repositories {
+		mavenCentral()
+//		maven { url "http://url" }
+	}
+
+	sourceSets {
+		integrationTest {
+			java {
+				compileClasspath += main.output + test.output
+				runtimeClasspath += main.output + test.output
+				srcDir file('src/integration-test/java')
+			}
+			groovy {
+				compileClasspath += main.output + test.output
+				runtimeClasspath += main.output + test.output
+				srcDir file('src/integration-test/groovy')
+			}
+			resources.srcDir file('src/integration-test/resources')
+			resources.srcDir file('src/webapp')
+		}
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		}
+	}
+
+	dependencies {
+		compile('org.projectlombok:lombok')
+		compile('org.springframework.boot:spring-boot-starter-web')
+		compile('org.slf4j:log4j-over-slf4j')
+		compile('net.logstash.logback:logstash-logback-encoder:6.1')
+		compile('org.apache.commons:commons-lang3:3.7')
+		compile('org.springframework.boot:spring-boot-starter-validation')
+		annotationProcessor("org.projectlombok:lombok")
+		testAnnotationProcessor("org.projectlombok:lombok")
+
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+		testCompile('org.spockframework:spock-core:1.2-groovy-2.4')
+		testCompile('org.spockframework:spock-spring:1.2-groovy-2.4')
+		testCompile('nl.jqno.equalsverifier:equalsverifier:2.5.1')
+
+		compileOnly "org.springframework.boot:spring-boot-configuration-processor"
+
+		compile "io.springfox:springfox-swagger2:$springfoxSwaggerVer"
+	}
+
+	configurations {
+		integrationTestCompile.extendsFrom testCompile
+		integrationTestRuntime.extendsFrom testRuntime
+	}
+
+	task integrationTest(type: Test) {
+		afterTest { desc, result ->
+			logger.quiet "Executing integration test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+		}
+		testClassesDirs = sourceSets.integrationTest.output.classesDirs
+		classpath = sourceSets.integrationTest.runtimeClasspath
+		outputs.upToDateWhen { false }
+	}
+
+}

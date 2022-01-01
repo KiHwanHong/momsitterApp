@@ -1,0 +1,7 @@
+logging:
+  config: classpath:logback-prod.xml
+
+jwt:
+  server:
+    secret: "prodwoowayouthapijsonwebtoken"
+    auth-key: "prodwoowayouth2021certificate"

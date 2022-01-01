@@ -1,0 +1,7 @@
+${AnsiColor.BRIGHT_GREEN}--------------------------------------------------------------------------
+맘시터서비스 API
+--------------------------------------------------------------------------
+${AnsiColor.WHITE}Spring Boot Version : ${spring-boot.version}
+Spring Boot Formatted Version : ${spring-boot.formatted-version}
+--------------------------------------------------------------------------
+

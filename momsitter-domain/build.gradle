@@ -1,0 +1,38 @@
+plugins {
+    id "org.flywaydb.flyway" version "5.1.4"
+}
+
+apply from: '../jpa.gradle'
+
+bootJar.enabled = false
+jar.enabled = true
+
+description = "momsitter domain module"
+
+dependencies {
+    compile project(':support')
+
+    compile("org.mariadb.jdbc:mariadb-java-client:2.3.0")
+
+    compile("org.hibernate:hibernate-envers")
+    compile("mysql:mysql-connector-java:5.1.42")
+    compile("org.springframework.cloud:spring-cloud-starter-openfeign")
+    compile("org.springframework.boot:spring-boot-starter-cache")
+
+    testCompile('nl.jqno.equalsverifier:equalsverifier:3.1.12')
+
+
+}
+
+jar.dependsOn test
+// jar.dependsOn integrationTest
+
+flyway {
+    url = "jdbc:mysql://localhost:3306/momsitter?useSSL=false"
+    user = "root"
+    password = "root"
+    locations = ["filesystem:${file('src/migration/momsitter').absolutePath}"]
+    encoding = 'UTF-8'
+    outOfOrder = true // 여러브랜치에서 서로 다른 날짜로 만들어도 작동하도록
+    validateOnMigrate = true
+}

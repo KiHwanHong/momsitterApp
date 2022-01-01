@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="data" type="woowa.dreams.frontend.dto.recruit.RecruitMetadataDto"*/-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=1280">
+  <meta property="og:title" th:content="${data.title}">
+  <meta property="og:description" th:content="${data.description}">
+  <meta property="og:image" th:content="${data.image}">
+  <meta property="og:url" th:content="${data.websiteUrl}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" th:content="${data.title}">
+  <meta name="twitter:description" th:content="${data.description}">
+  <meta name="twitter:image" th:content="${data.image}">
+  <link rel="icon" href="/favicon.ico">
+  <title th:text="${data.sourceFrom}">sourceFrom</title>
+</head>
+<body>
+<!--<H1>공유하기 브릿지 페이지</H1>-->
+<script th:inline="javascript">
+  const targetUrl = /*[[${data.sharedUrl}]]*/ 'http://';
+  window.location.href = targetUrl;
+</script>
+</body>
+</html>

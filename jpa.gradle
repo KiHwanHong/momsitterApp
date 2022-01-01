@@ -1,0 +1,41 @@
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
+apply plugin: "idea"
+
+ext {
+    querydslSrcDir = "$buildDir/generated/querydsl"
+}
+
+compileQuerydsl {
+    delete "./src/main/generated/"
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+dependencies {
+    compile 'com.querydsl:querydsl-jpa'
+    compile 'com.querydsl:querydsl-apt'
+
+    compileQuerydsl {
+        options.annotationProcessorPath = configurations.querydsl
+    }
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile('org.hibernate:hibernate-spatial')
+}
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslSrcDir
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main/java", querydslSrcDir]
+        }
+    }
+}
+
+idea {
+    module {
+        sourceDirs += file(querydslSrcDir)
+    }
+}

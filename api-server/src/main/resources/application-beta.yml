@@ -1,0 +1,7 @@
+logging:
+  config: classpath:logback-beta.xml
+
+jwt:
+  server:
+    secret: "betawoowayouthapijsonwebtoken"
+    auth-key: "betawoowayouth2021certificate"

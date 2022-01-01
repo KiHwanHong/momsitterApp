@@ -1,0 +1,73 @@
+spring.jpa.open-in-view: false
+
+spring:
+  flyway:
+    enabled: false
+
+momsitter:
+  domain:
+    datasource:
+      poolName: momsitter-domain-cp
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: org.mariadb.jdbc.Driver
+      jdbcUrl: "jdbc:mysql://localhost:3306/momsitter"
+      username: root
+      password: root
+      auto-commit: false
+      sqlScriptEncoding: UTF-8
+      connectionTimeout: 3000
+      idleTimeout: 0
+      maxLifetime: 60000
+      maximumPoolSize: 5
+    jpa:
+      hibernate:
+        ddl-auto: validate
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL57Dialect
+          format_sql: true
+          show-sql: true
+          order_inserts: true
+          order_updates: true
+          jdbc:
+            batch_size: 500
+            fetch_size: 500
+            batch_versioned_data: true
+
+dynacode:
+  scheduled:
+    delay: 10000
+
+---
+spring:
+  profiles: beta
+
+momsitter:
+  domain:
+    datasource:
+      jdbcUrl: "jdbc:mysql:aurora://beta-url:6025/momsitter?useServerPrepStmts=false&rewriteBatchedStatements=true&connectTimeout=30000&socketTimeout=10000&useUnicode=true&characterEncoding=UTF-8"
+      username: svc_momsitter
+      password: 1xdnmFDZPp!X)
+      auto-commit: false
+      maximumPoolSize: 5
+
+dynacode:
+  scheduled:
+    delay: 10000
+
+---
+spring:
+  profiles: prod
+
+momsitter:
+  domain:
+    datasource:
+      jdbcUrl: "jdbc:mysql:aurora://prod-url:6025/momsitter?useServerPrepStmts=false&rewriteBatchedStatements=true&connectTimeout=30000&socketTimeout=10000&useUnicode=true&characterEncoding=UTF-8"
+      username: svc_momsitter
+      password: I6n<px(D>Ij5@
+      auto-commit: false
+      maximumPoolSize: 50
+
+dynacode:
+  scheduled:
+    delay: 300000
