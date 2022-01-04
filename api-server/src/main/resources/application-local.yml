@@ -4,9 +4,6 @@ logging:
     web: debug
 
 jwt:
-  client:
-    secret: localwoowayouthfrontjsonwebtoken
-    token-validity-in-seconds: 5400
-  server:
-    secret: "localmomsitterauthapiwebtoken"
-    auth-key: "localwoowayouth2021mositter"
+  token:
+    secret-key: "localwoowayouth2021mositter"
+    expire-length: 3600000

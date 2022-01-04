@@ -34,39 +34,32 @@ public class MembersDto {
   private String membersName;
 
   /** 생년월일 */
-  @Pattern(regexp = DATE_TIME_FORMAT)
-  @Size(max = 8)
+//  @Pattern(regexp = DATE_TIME_FORMAT)
+//  @Size(max = 8)
   private String membersBirthDay;
 
   /** 성별 */
-  @Column(name = "members_gender", nullable = false, length = 8)
-  private int membersGender;
+  private String membersGender;
 
   /** 아이디 */
-  @Column(name = "members_id", nullable = false, length = 10)
-  private int membersId;
+  private String membersId;
 
   /** 비밀번호 */
-  @Column(name = "members_password", nullable = false, length = 10)
   private String membersPassword;
 
   /** 이메일 */
-  @Column(name = "members_email", nullable = false, length = 10)
   private String membersEmail;
 
   /** 아이정보	 */
-  @Column(name = "members_baby_info", nullable = false, length = 10)
-  private String membersBabyInfo;
+  private String membersCareRangeInfo;
 
   /** 신청내용 */
-  @Column(name = "members_application_contents", nullable = false, length = 200)
   private String membersApplicationContents;
 
   @Builder
   public MembersDto(Long membersNumber, String membersName, String membersBirthDay,
-      int membersGender,
-      int membersId, String membersPassword, String membersEmail, String membersBabyInfo,
-      String membersApplicationContents) {
+      String membersGender, String membersId, String membersPassword, String membersEmail,
+      String membersCareRangeInfo, String membersApplicationContents) {
     this.membersNumber = membersNumber;
     this.membersName = membersName;
     this.membersBirthDay = membersBirthDay;
@@ -74,7 +67,7 @@ public class MembersDto {
     this.membersId = membersId;
     this.membersPassword = membersPassword;
     this.membersEmail = membersEmail;
-    this.membersBabyInfo = membersBabyInfo;
+    this.membersCareRangeInfo = membersCareRangeInfo;
     this.membersApplicationContents = membersApplicationContents;
   }
 
@@ -87,7 +80,7 @@ public class MembersDto {
     this.membersId = membersEntity.getMembersId();
     this.membersPassword = membersEntity.getMembersPassword();
     this.membersEmail = membersEntity.getMembersEmail();
-    this.membersBabyInfo = membersEntity.getMembersBabyInfo();
+    this.membersCareRangeInfo = membersEntity.getMembersCareRangeInfo();
     this.membersApplicationContents = membersEntity.getMembersApplicationContents();
   }
 }

@@ -44,7 +44,7 @@ public class ParentsDto extends AbstractDto {
   private String parentsGender;
 
   /** 아이디 */
-  private int parentsId;
+  private String parentsId;
 
   /** 비밀번호 */
   private String parentsPassword;
@@ -60,7 +60,7 @@ public class ParentsDto extends AbstractDto {
 
   @Builder
   public ParentsDto(Long parentsNumber, String parentsName, String parentsBirthDay,
-      String parentsGender, int parentsId, String parentsPassword, String parentsEmail,
+      String parentsGender, String parentsId, String parentsPassword, String parentsEmail,
       String parentsBabyInfo, String parentsApplicationContents) {
     this.parentsNumber = parentsNumber;
     this.parentsName = parentsName;

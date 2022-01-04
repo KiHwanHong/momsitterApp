@@ -3,7 +3,7 @@ package momsitter.core.dto;
 import java.util.List;
 import lombok.*;
 
-/** 인사시스템 - 대상자 정보 저장 리턴 Dto */
+/** ResponseResult Dto  */
 @Getter
 @Setter
 @ToString
