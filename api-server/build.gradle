@@ -7,7 +7,7 @@ dependencies {
     compile project(':momsitter-domain')
 
     compile 'org.springframework.boot:spring-boot-starter-web'
-//    compile "org.springframework.boot:spring-boot-starter-security"
+    compile "org.springframework.boot:spring-boot-starter-security"
 
     compile 'org.apache.poi:poi:4.0.0'
     compile 'org.apache.poi:poi-ooxml:4.0.0'

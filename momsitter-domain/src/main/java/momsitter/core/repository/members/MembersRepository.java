@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface MembersRepository extends JpaRepository<MembersEntity, Long>,
     MembersRepositoryCustom {
 
-  Optional<MembersEntity> findByIdAndPassword(Id id, Password password);
-
-  Optional<MembersEntity> findById(Id id);
+//  Optional<MembersEntity> findByMembersNumberAndPassword(Id id, Password password);
+//
+//  Optional<MembersEntity> findById(Id id);
 }

@@ -26,5 +26,4 @@ public class MembersController {
   public @ResponseBody  ApiResponse<List<MembersDto>> selectParentsInfo() {
     return ApiResponseGenerator.success(membersService.findAllData());
   }
-
 }

@@ -5,5 +5,5 @@ logging:
 
 jwt:
   token:
-    secret-key: "localwoowayouth2021mositter"
+    secret-key: "hello"
     expire-length: 3600000

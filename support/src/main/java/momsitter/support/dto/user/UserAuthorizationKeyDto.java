@@ -13,9 +13,13 @@ import lombok.Setter;
 public class UserAuthorizationKeyDto extends UserBaseDto {
 
   @NotEmpty
-  private String userPassword;
+  private String membersNumber;
 
   @NotEmpty
-  private String authorizationKeyValue;
+  private String membersPassword;
+
+//  @NotEmpty
+  // private String authorizationKeyValue;
+
 
 }
